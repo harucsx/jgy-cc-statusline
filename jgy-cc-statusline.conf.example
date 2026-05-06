@@ -9,10 +9,10 @@
 MESSAGE_URL=""
 
 # 메시지 노출 주기 (초). 이 시간이 지나면 다음 redraw 때 메시지를 띄움.
-SHOW_INTERVAL=1500
+SHOW_INTERVAL=1800
 
 # 메시지 노출 윈도우 (초). 처음 띄운 뒤 이 시간 동안만 표시.
-SHOW_DURATION=10
+SHOW_DURATION=30
 
 # ─── 자동 업데이트 ───
 # statusline.sh 자체를 받아오는 raw URL.

@@ -9,8 +9,8 @@ CONFIG_FILE="$HOME/.claude/jgy-cc-statusline.conf"
 [ -f "$CONFIG_FILE" ] && . "$CONFIG_FILE"
 : ${MESSAGE_URL:=}
 : ${SCRIPT_URL:=}
-: ${SHOW_INTERVAL:=1500}
-: ${SHOW_DURATION:=10}
+: ${SHOW_INTERVAL:=1800}
+: ${SHOW_DURATION:=30}
 : ${SYNC_INTERVAL:=3600}
 
 SCRIPT_PATH="$0"
@@ -364,8 +364,8 @@ now_time=$(date +%H:%M:%S)
 line2="${line2}${B_WHITE}${now_time}${RESET}"
 
 # ─── 출력 ───
-[ -n "$show_msg" ] && printf "${DIM}💬 ${RESET}%s\n" "$show_msg"
 [ -n "$line1" ] && printf "%s\n" "$line1"
 [ -n "$line2" ] && printf "%s" "$line2"
+[ -n "$show_msg" ] && printf "\n${DIM}💬 ${RESET}%s" "$show_msg"
 [ -n "$ports_line" ] && printf "\n%s" "$ports_line"
 exit 0
