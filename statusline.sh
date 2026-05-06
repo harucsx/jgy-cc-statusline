@@ -378,7 +378,7 @@ now_time=$(date +%H:%M:%S)
 line2="${line2}${B_WHITE}${now_time}${RESET}"
 
 # ─── 출력 ───
-[ -n "$show_msg" ] && printf "${DIM}💬 ${RESET}%s\n" "$show_msg"
+[ -n "$show_msg" ] && printf "${DIM}💬 ${RESET}${B_WHITE}%s${RESET}\n" "$show_msg"
 [ -n "$line1" ] && printf "%s\n" "$line1"
 [ -n "$line2" ] && printf "%s" "$line2"
 [ -n "$ports_line" ] && printf "\n%s" "$ports_line"
