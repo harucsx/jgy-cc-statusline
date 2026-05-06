@@ -38,16 +38,17 @@ CTX 24% (256k/1M) │ 5h 92% (↻2h 30m) │ 7d 41% (↻5d 12h) │ 13:12:42
 
 ## 설치
 
-### Claude Code 한테 시키기 (가장 편함)
+### 가장 편함 — 클론 없이 프롬프트 한 번만
 
-이 저장소를 클론한 뒤 그 디렉터리에서 Claude Code 를 띄우고, [`INSTALL_PROMPT.md`](./INSTALL_PROMPT.md) 안의 프롬프트를 통째로 붙여넣으면 됩니다. 백업 → 복사 → settings.json 등록 → conf 파일 생성 → 캐시 정리까지 알아서 처리합니다.
+아무 디렉터리에서 Claude Code 를 띄우고 [`INSTALL_PROMPT.md`](./INSTALL_PROMPT.md) 의 박스 안 내용을 그대로 채팅에 붙여넣으세요. statusline 본체와 conf 를 GitHub raw 에서 받아 `~/.claude/` 에 설치하고 settings.json 까지 자동 등록합니다.
 
 ### 수동 설치
 
 ```bash
-cp statusline.sh ~/.claude/statusline.sh
+mkdir -p ~/.claude
+curl -fsSL https://raw.githubusercontent.com/harucsx/jgy-cc-statusline/main/statusline.sh -o ~/.claude/statusline.sh
 chmod +x ~/.claude/statusline.sh
-cp jgy-cc-statusline.conf.example ~/.claude/jgy-cc-statusline.conf
+[ ! -f ~/.claude/jgy-cc-statusline.conf ] && curl -fsSL https://raw.githubusercontent.com/harucsx/jgy-cc-statusline/main/jgy-cc-statusline.conf.example -o ~/.claude/jgy-cc-statusline.conf
 ```
 
 `~/.claude/settings.json` 에 다음 키를 추가하세요 (다른 키는 그대로 두고).
