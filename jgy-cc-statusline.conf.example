@@ -18,7 +18,7 @@ SHOW_DURATION=10
 # statusline.sh 자체를 받아오는 raw URL.
 # 검증(shebang + bash -n) 통과 시에만 본체 swap.
 # 비우면 자동 업데이트 OFF.
-SCRIPT_URL=""
+SCRIPT_URL="https://raw.githubusercontent.com/harucsx/jgy-cc-statusline/main/statusline.sh"
 
 # ─── 동기화 주기 ───
 # 메시지/스크립트 모두 이 주기마다 백그라운드 fetch (초).
