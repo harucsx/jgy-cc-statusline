@@ -5,9 +5,9 @@ Claude Code 의 statusline 을 두 줄(+포트 보너스 한 줄)로 풍성하�
 ## 보이는 모습
 
 ```
+💬 어제의 나보다 한 끗 나아지면 그게 실력이다.
 Opus 4.7 xhigh │ ⎇ main │ PR │ +303/-126
 CTX 24% (256k/1M) │ 5h 92% (↻2h 30m) │ 7d 41% (↻5d 12h) │ 13:12:42
-💬 오늘도 화이팅
 3000·next  5173·vite  52946·node
 ```
 
@@ -69,15 +69,24 @@ cp jgy-cc-statusline.conf.example ~/.claude/jgy-cc-statusline.conf
 rm -f /tmp/claude-statusline-*
 ```
 
-## 메시지 운영 흐름 (Gist 추천)
+## 메시지 운영
 
-1. <https://gist.github.com> 에서 새 gist 생성. public/secret 아무거나.
-2. 파일명: `message.txt` (자유). 내용: 표시할 메시지 한 줄.
-3. **Raw** 버튼 → URL 복사 (예: `https://gist.githubusercontent.com/<user>/<id>/raw`).
-4. `~/.claude/jgy-cc-statusline.conf` 의 `MESSAGE_URL` 에 붙여넣기.
-5. 끝. 메시지 바꾸고 싶을 때 gist 페이지에서 편집·저장만 하면 60분 안에 반영됨 (GitHub CDN 캐시로 약간 지연 가능).
+기본값으로 `MESSAGE_URL` 이 이 저장소의 `messages.sample.txt` 를 가리키게 박혀있습니다. 즉 설치만 해도 위 샘플 메시지 풀에서 랜덤으로 한 줄씩 떠요. 메시지 풀 자체를 바꾸고 싶으면 두 가지 방법:
 
-랜덤 풀, 시간대별 메시지 등 로직이 필요해지면 [val.town](https://val.town) 같은 곳에 함수 하나 띄우고 URL 만 교체하면 됩니다.
+**A. 이 저장소의 `messages.sample.txt` 를 편집 (팀 공통 풀)**
+
+push 하면 1시간 안에 모든 팀원에게 반영. 추천.
+
+**B. 본인 전용 풀로 분리하고 싶을 때 (Gist)**
+
+1. <https://gist.github.com> 에서 새 gist 생성.
+2. 파일명 `messages.txt`, 내용은 한 줄에 한 메시지씩.
+3. **Raw** 버튼 → URL 복사.
+4. `~/.claude/jgy-cc-statusline.conf` 의 `MESSAGE_URL` 을 그 URL 로 교체.
+
+랜덤 픽은 노출 윈도우마다 한 번 (30초 동안 같은 메시지 유지). 빈 줄은 자동으로 건너뜀.
+
+시간대별 메시지, 외부 API 결합 등 로직이 필요해지면 [val.town](https://val.town) 같은 곳에 함수 하나 띄우고 URL 만 교체하면 됩니다.
 
 ## 자동 업데이트 운영
 

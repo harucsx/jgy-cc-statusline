@@ -68,16 +68,24 @@ if [ $((now - last_sync)) -ge "$SYNC_INTERVAL" ]; then
   ( do_sync ) >/dev/null 2>&1 &
 fi
 
-# ─── 메시지 노출 윈도우 ───
+# ─── 메시지 노출 윈도우 (캐시에서 랜덤 한 줄) ───
 show_msg=""
 if [ -n "$MESSAGE_URL" ] && [ -f "$MESSAGE_CACHE" ] && [ -s "$MESSAGE_CACHE" ]; then
   last_shown=$(jq -r '.last_shown // 0' "$SHOW_STATE" 2>/dev/null || echo 0)
   since_show=$((now - last_shown))
   if [ "$since_show" -ge "$SHOW_INTERVAL" ]; then
-    jq -n --argjson t "$now" '{last_shown: $t}' > "$SHOW_STATE"
-    show_msg=$(head -1 "$MESSAGE_CACHE" 2>/dev/null)
+    # 새 노출 윈도우 — 캐시에서 랜덤 한 줄 선택, SHOW_STATE 에 저장
+    msgs=()
+    while IFS= read -r line; do
+      [ -n "$line" ] && msgs+=("$line")
+    done < "$MESSAGE_CACHE"
+    if [ "${#msgs[@]}" -gt 0 ]; then
+      show_msg="${msgs[$((RANDOM % ${#msgs[@]}))]}"
+      jq -n --argjson t "$now" --arg m "$show_msg" '{last_shown: $t, shown_msg: $m}' > "$SHOW_STATE"
+    fi
   elif [ "$since_show" -lt "$SHOW_DURATION" ]; then
-    show_msg=$(head -1 "$MESSAGE_CACHE" 2>/dev/null)
+    # 윈도우 안 — 직전에 고른 메시지 그대로 유지
+    show_msg=$(jq -r '.shown_msg // empty' "$SHOW_STATE" 2>/dev/null)
   fi
 fi
 
@@ -364,8 +372,8 @@ now_time=$(date +%H:%M:%S)
 line2="${line2}${B_WHITE}${now_time}${RESET}"
 
 # ─── 출력 ───
+[ -n "$show_msg" ] && printf "${DIM}💬 ${RESET}%s\n" "$show_msg"
 [ -n "$line1" ] && printf "%s\n" "$line1"
 [ -n "$line2" ] && printf "%s" "$line2"
-[ -n "$show_msg" ] && printf "\n${DIM}💬 ${RESET}%s" "$show_msg"
 [ -n "$ports_line" ] && printf "\n%s" "$ports_line"
 exit 0

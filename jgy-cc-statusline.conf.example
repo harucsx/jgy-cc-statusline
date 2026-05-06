@@ -3,10 +3,11 @@
 # 비워두면 해당 기능이 비활성화됩니다.
 
 # ─── 메시지 fetch ───
-# Gist raw URL 또는 plain text 응답을 주는 엔드포인트.
-# 응답의 첫 줄이 표시 메시지로 사용됩니다.
+# 메시지 풀 URL. 응답 본문은 한 줄에 메시지 하나씩 (빈 줄은 무시).
+# 노출 윈도우마다 그 안에서 랜덤으로 한 줄을 골라 띄움.
+# 본인/팀 전용 풀 쓰려면 자기 gist raw URL 로 교체하세요.
 # 비우면 메시지 기능 OFF.
-MESSAGE_URL=""
+MESSAGE_URL="https://raw.githubusercontent.com/harucsx/jgy-cc-statusline/main/messages.sample.txt"
 
 # 메시지 노출 주기 (초). 이 시간이 지나면 다음 redraw 때 메시지를 띄움.
 SHOW_INTERVAL=1800
