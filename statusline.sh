@@ -68,6 +68,12 @@ if [ $((now - last_sync)) -ge "$SYNC_INTERVAL" ]; then
   ( do_sync ) >/dev/null 2>&1 &
 fi
 
+# 첫 실행 케이스: 메시지 캐시가 아직 없으면 동기로 한 번만 fetch (3초 타임아웃)
+if [ -n "$MESSAGE_URL" ] && [ ! -f "$MESSAGE_CACHE" ]; then
+  curl -fsSL --max-time 3 "$MESSAGE_URL" -o "$MESSAGE_CACHE" 2>/dev/null
+  [ -s "$MESSAGE_CACHE" ] || rm -f "$MESSAGE_CACHE"
+fi
+
 # ─── 메시지 노출 윈도우 (캐시에서 랜덤 한 줄) ───
 show_msg=""
 if [ -n "$MESSAGE_URL" ] && [ -f "$MESSAGE_CACHE" ] && [ -s "$MESSAGE_CACHE" ]; then
