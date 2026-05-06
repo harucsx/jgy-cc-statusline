@@ -1,0 +1,25 @@
+# jgy-cc-statusline 설정
+# 이 파일을 ~/.claude/jgy-cc-statusline.conf 로 복사한 뒤 값을 채우세요.
+# 비워두면 해당 기능이 비활성화됩니다.
+
+# ─── 메시지 fetch ───
+# Gist raw URL 또는 plain text 응답을 주는 엔드포인트.
+# 응답의 첫 줄이 표시 메시지로 사용됩니다.
+# 비우면 메시지 기능 OFF.
+MESSAGE_URL=""
+
+# 메시지 노출 주기 (초). 이 시간이 지나면 다음 redraw 때 메시지를 띄움.
+SHOW_INTERVAL=1500
+
+# 메시지 노출 윈도우 (초). 처음 띄운 뒤 이 시간 동안만 표시.
+SHOW_DURATION=10
+
+# ─── 자동 업데이트 ───
+# statusline.sh 자체를 받아오는 raw URL.
+# 검증(shebang + bash -n) 통과 시에만 본체 swap.
+# 비우면 자동 업데이트 OFF.
+SCRIPT_URL=""
+
+# ─── 동기화 주기 ───
+# 메시지/스크립트 모두 이 주기마다 백그라운드 fetch (초).
+SYNC_INTERVAL=3600
