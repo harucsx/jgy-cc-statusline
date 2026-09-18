@@ -1,4 +1,6 @@
-# 설치 프롬프트
+# Claude Code 설치 프롬프트
+
+Codex CLI에서는 [Codex 전용 설치 프롬프트](./CODEX_INSTALL_PROMPT.md)를 사용하세요.
 
 저장소를 클론할 필요 없이, **아무 디렉터리에서 Claude Code 를 띄우고** 아래 박스 안 내용을 통째로 복사해서 채팅에 붙여넣기만 하면 됩니다.
 
